@@ -43,7 +43,7 @@ public class App extends Application {
         initOperationsMap();
         createTextField(root);
         createButtons();
-        loadUI(root);
+        setButtonLocation(root);
         primaryStage.setScene(new Scene(root, 1000, 650));
         primaryStage.show();
     }
@@ -142,7 +142,7 @@ public class App extends Application {
         return textField.getText().split("\\" + currentOperation)[1];
     }
 
-    private void loadUI(Pane root) {
+    private void setButtonLocation(Pane root) {
         int startX = 150;
         int startY = 150;
         int index = 0;
