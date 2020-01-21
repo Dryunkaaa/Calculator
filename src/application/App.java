@@ -44,7 +44,7 @@ public class App extends Application {
         createTextField(root);
         createButtons();
         setButtonLocation(root);
-        primaryStage.setScene(new Scene(root, 1000, 650));
+        primaryStage.setScene(new Scene(root, 200, 290));
         primaryStage.show();
     }
 
@@ -107,14 +107,14 @@ public class App extends Application {
     private void eraseSymbol(){
         if (textField.getText().length() > 0) {
             textField.setText(textField.getText().substring(0, textField.getText().length() - 1));
-            if (textField.getText().equals("")) textField.setText("0");
+            if (textField.getText().isEmpty()) textField.setText("0");
         }
     }
 
     private void checkIfStandardMathOperationSelected(Button button) {
         for (String operation : STANDARD_MATH_OPERATIONS) {
             if (button.getText().equals(operation)) button.setOnAction(event -> {
-                if (!textField.getText().equals("") && !textField.getText().endsWith(button.getText()) && !containsSecondNumber()) {
+                if (!textField.getText().isEmpty() && !textField.getText().endsWith(button.getText()) && !containsSecondNumber()) {
                     currentOperation = button.getText();
                     textField.setText(textField.getText() + currentOperation);
                 }
@@ -143,8 +143,8 @@ public class App extends Application {
     }
 
     private void setButtonLocation(Pane root) {
-        int startX = 150;
-        int startY = 150;
+        int startX = 0;
+        int startY = (int) (textField.getTranslateY()+textField.getPrefHeight());
         int index = 0;
 
         for (int i = 0; i < 5; i++) {
@@ -154,21 +154,21 @@ public class App extends Application {
                 button.setTranslateX(startX);
                 button.setTranslateY(startY);
                 root.getChildren().add(button);
-                startX += BUTTON_SIZE + 10;
+                startX += BUTTON_SIZE;
                 index++;
             }
-            startX = 150;
-            startY += BUTTON_SIZE + 10;
+            startX = 0;
+            startY += BUTTON_SIZE;
         }
     }
 
     private void createTextField(Pane root) {
         textField = new TextField();
         textField.setText("0");
-        textField.setPrefSize(230, 40);
+        textField.setPrefSize(200, 40);
         textField.setFont(new Font(20));
-        textField.setTranslateX(150);
-        textField.setTranslateY(150 - textField.getPrefHeight() - 15);
+        textField.setTranslateX(0);
+        textField.setTranslateY(0);
         textField.setEditable(false);
         root.getChildren().add(textField);
     }
